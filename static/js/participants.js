@@ -55,7 +55,7 @@ function makeSchedule() {
 		}
 
 		if (completed === "True") {
-			color = "w3-gray";	
+			color = "w3-teal";	
 		} else {
 			color = "w3-red";
 		}

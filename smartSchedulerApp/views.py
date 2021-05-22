@@ -54,52 +54,40 @@ def makeSchedule(request):
 		return HttpResponse(status=405)
 
 	payload = json.loads(request.body)	
+	shift_table = list(payload['shifts'].values())
+	print(list(shift_table))
 	payload['shifts'] = processPayload(payload)
-
+	
 	s = ScheduleWeekly(payload)
-	result = s.schedule()
-
-	processResult()
-	if type(result) is str:
-		response = HttpResponse(result)
+	shift_assignments = s.schedule()
+	
+	if type(shift_assignments) is str:
+		response = HttpResponse(shift_assignments)
 		response['completed'] = False
 		return response
 	else:
-		result = processResult();
-		days = ['M', 'T', 'W', 'R', 'F', 'S', 'S']
-		rows = [{'9:15': 'Nat', '12:00':'Nat', '': ' ', '  ': ' ', '    ': ' ',}, {'9:15': 'Nat', '12:00':'Nat'}, {'10:15:''Luke',}, {'12:00':'Laura'}]
+		fillShiftTable(shift_assignments, shift_table);
+		days = shift_table[0]
+		rows = shift_table[1:]#[{'9:15': 'Nat', '12:00':'Nat', '': ' ', '  ': ' ', '    ': ' ',}, {'9:15': 'Nat', '12:00':'Nat'}, {'10:15:''Luke',}, {'12:00':'Laura'}]
 
 		response = render(request, 'result.html', {'days': days, 'rows':rows})
 		response['completed'] = True
 		return response
 
-def processResult():
-	dic =  {'M-12:30 PM': ['Pharez'], 'M-11:30 AM':['Jayden'], 'T-11:30 AM':['Marcus'], 'M-1:30 PM':['Kevin' ], 'T-12:30 PM':['Tiana'] }
-	c  = {'M':0,'T':1,'W':2,'R':3,'F':4,'S':5,'Su':6}
-	new_dic = {}
-	for key in dic:
-		new_key =  key
-		n = c.get(new_key[0])
-		print(n)
-		if n != None:
-			new_key = new_key[:0] + str(c[new_key[0]]) + new_key[1:]
-			new_dic[new_key] = dic[key]
-	ordered_dict = OrderedDict(sorted(new_dic.items()))
-	
-	res = [[{}]]
+def fillShiftTable(shift_assignments, shift_table):
+	for i in range(1, len(shift_table)):
+		for j in range(7):
+			if shift_table[i][j] != ' ':
+				shift = shift_table[i][j]
+				s = convert(shift, j)
+				name = shift_assignments[s]
+				shift_table[i][j] = f"{shift} {name}"
 
-	for x in ordered_dict:
-		
-		placed = False
-		for i in range(len(res)):
-			if x not in res[i]:
-				res[i][x] = ordered_dict[x]
-				placed = True
-				break
-
-		if not placed:
-			res.append([{}])
-
+#have add support for weekends, should switch to number conversions
+def convert(shift, day):
+	day_conversions = {'0':'M', '1':'T', '2':'W', '3':'R', '4':'F', '5':'S', '6':'S'}
+	day = day_conversions[str(day)]
+	return f"{day}-{shift}"
 
 def processPayload(payload):
 	#turn cols into rows
