@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Daily Schedule
+{% endblock %}
+
+{% block content %}
+     {% load static %}  
+
+<div class="w3-card-2 w3-third w3-padding w3-margin">
+		<h3>Create a Shift</h3>
+		<label>Select a Day</label>
+		<select id='day' class="w3-select w3-margin" required>
+			<option value="">Select a Day of the Week</option>
+			<option value="0">Monday</option>
+			<option value="1">Tuesday</option>
+			<option value="2">Wednesday</option>
+			<option value="3">Thursday</option>
+			<option value="4">Friday</option>
+			<option value="5">Saturday</option>
+			<option value="6">Sunday</option>
+		</select>
+		<label>Select a Time</label>
+		<input type="time" id='time' class="w3-input w3-margin">
+		<button class="w3-button w3-blue" type='Submit' onclick="addShift(event)">Submit</button>
+</div>
+
+<div id='test' class="w3-card-2 w3-padding w3-margin w3-half" style="min-height: 70vh; width:60%; margin-top: 16px; float: right;">
+	<p id="calendarText" class="w3-center">Add Shifts to See them Here!</p>
+    <p class="w3-margin">Click on a Shift To Delete</p>
+
+	<table class="w3-table-all w3-responsive w3-centered w3-margin-top w3-large center"style="max-width:fit-content;">
+	    <thead >
+	        <tr>
+	            <th colspan="15">Schedule</th>
+	        </tr>
+	    </thead>
+	    <tbody id='tableBody'></tbody>
+	</table>
+
+</div>
+
+<div class="w3-margin">
+	<button class="w3-button w3-green" onclick="loadParticipants()">Finish Creating Shift Schedule</button>
+</div>
+	
+
+<script src="{% static '/js/shifts.js' %}" onload="loadShifts(); localStorage.clear()"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.js"></script>
+
+{% endblock %} 

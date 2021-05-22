@@ -1,0 +1,14 @@
+.pointer {
+	cursor:pointer;
+}
+
+.center {
+	margin-right: auto;
+	margin-left: auto;
+}
+.wrapper {
+	min-height: calc(100vh - 50px);
+}
+.sticky-bottom {
+  min-height: 50px; /* Should be equal to the height of your footer */
+}

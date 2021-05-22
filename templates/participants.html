@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}
+Weekly Schedule Particpants
+{% endblock %}
+
+
+{% block head %}
+<style>
+	table, th, td {
+	border: 1px solid black;
+	}
+</style>
+{% endblock %}
+
+{% block content %}
+     {% load static %}  
+
+<div id="steps" class="w3-card-2 w3-twothirds w3-padding w3-margin center" style="clear;">
+	<p>Add Employee Names and their Unavailable Shifts. Click to add. Click again to remove</p>
+</div>
+<div>
+	<div class="w3-card-2 w3-padding w3-margin w3-col" style="width:45%;">
+		<label class="w3-label" >Name</label>
+		<input class="w3-input" type="text" id="name">
+		<br>
+		<h5>Select the Shifts this Employee Cannot Work:</h5>
+		<p id="unavailable"> </p>
+		<div>
+			<table  class="w3-table-all w3-responsive w3-centered w3-margin-top center"style="max-width:fit-content;">
+		    	<thead >
+		        <tr>
+		            <th colspan="15">Schedule</th>
+		        </tr>
+		    	</thead>
+		    	<tbody id='tableBody'></tbody>
+			</table>
+		</div>
+	<button class="w3-button w3-teal w3-margin-top" onclick="updateParticipantList()">Add</button>
+	<button class="w3-button w3-teal w3-margin-top" onclick="makeSchedule()">Finish</button>
+	</div>
+	<div class="w3-card-2 w3-padding w3-margin w3-col" style="min-height: 70vh; min-width:30%; max-width:45%;">
+		<h5 class="w3-margin">Participant Info</h5>
+		<ul style="display:inline-block" id='participantList'>
+		</ul>
+	</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.js"></script>
+<script src="{% static '/js/shifts.js' %}" onload="loadShifts();"></script>
+<script src="{% static '/js/participants.js' %}"></script>
+
+{% endblock %}

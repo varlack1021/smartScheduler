@@ -1,0 +1,30 @@
+<div>
+	<table class="w3-table-all w3-responsive w3-centered w3-margin-top" style="max-width:fit-content; margin-left: auto; margin-right: auto">
+	    <thead >
+	        <tr>
+	            <th colspan="15">Schedule</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	        <tr>
+		    	{% for i in days %}
+
+	            <td>{{i}}</td>
+    	        
+    	        {% endfor %}
+
+	        </tr>
+	    	
+	    	{% for i in rows %}
+       		 <tr>
+
+       		 	{% for time, name in i.items %}
+	            <td style="min-width: 80px">{{time}} <br> {{name}}</td>
+    	    	{% endfor %}
+
+    	    </tr>
+	        {% endfor %}
+
+	    </tbody>
+	</table>
+</div>

@@ -1,0 +1,35 @@
+<html>
+<head>
+	{% load static %}
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="{% static 'css/schedule.css' %}">
+	{% block head %} {% endblock %}
+	<title>{% block title %}My Site{% endblock %}</title>
+</head>
+
+<body>
+	<div class="w3-card-2">
+		<div class="w3-bar w3-blue w3-large">
+			<a class="w3-bar-item w3-mobile w3-margin-left" style="width:30%">SmartScheduer.com</a>
+			<a class="w3-bar-item w3-mobile">To-Do List</a>
+			<a class="w3-bar-item w3-mobile">Schedule Shifts</a>
+			<a class="w3-bar-item w3-mobile">My Scheduled Shifts</a>
+			<a class="w3-bar-item w3-mobile">Settings</a>
+		</div>
+	</div>
+	<div id="content" class="wrapper">
+		{% block content %}
+    	{% endblock %}
+    </div>
+    <footer class="w3-card-2 sticky-bottom">
+		<div class="w3-bar w3-blue w3-large">
+			<a class="w3-bar-item w3-mobile w3-margin-left" style="width:30%">SmartScheduer.com</a>
+			<a class="w3-bar-item w3-mobile">To-Do List</a>
+			<a class="w3-bar-item w3-mobile">Schedule Shifts</a>
+			<a class="w3-bar-item w3-mobile">My Scheduled Shifts</a>
+			<a class="w3-bar-item w3-mobile">Settings</a>
+		</div>
+	</footer>
+</body>
+
+</html>
