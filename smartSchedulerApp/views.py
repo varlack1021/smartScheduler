@@ -33,7 +33,6 @@ def scheduleRaDuty(request):
 	payload = json.loads(request.body)
 	scheduler = Scheduler(payload)
 	scheduler.start_schedule()
-	print(payload)
 	path = Path(__file__).resolve().parent
 	path = Path(path, 'ms_files', scheduler.filename)
 	
@@ -55,7 +54,6 @@ def makeSchedule(request):
 
 	payload = json.loads(request.body)	
 	shift_table = list(payload['shifts'].values())
-	print(list(shift_table))
 	payload['shifts'] = processPayload(payload)
 	
 	s = ScheduleWeekly(payload)
@@ -80,7 +78,7 @@ def fillShiftTable(shift_assignments, shift_table):
 			if shift_table[i][j] != ' ':
 				shift = shift_table[i][j]
 				s = convert(shift, j)
-				name = shift_assignments[s]
+				name = shift_assignments[s] if s in shift_assignments else ""
 				shift_table[i][j] = f"{shift} {name}"
 
 #have add support for weekends, should switch to number conversions

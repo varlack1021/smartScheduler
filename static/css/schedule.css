@@ -12,3 +12,18 @@
 .sticky-bottom {
   min-height: 50px; /* Should be equal to the height of your footer */
 }
+
+.fit-content {
+	 width: fit-content;
+	 padding-left: 10px;
+	 padding-bottom: 3%;
+}
+
+.close {
+  cursor: pointer;
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-left: 15px;
+	background-color: #eee;
+
+}

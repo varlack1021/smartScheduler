@@ -80,6 +80,6 @@ class ScheduleWeekly:
 			if i == -1:
 				return("Could not schedule, Conflict with two or more people having one availability at the same time OR\n" 
 						"someone is not availble for any of the shifts")
-
+		print(self.shift_assignments)
 		shift_assignments = {y:x for x,y in self.shift_assignments.items()}
 		return shift_assignments
